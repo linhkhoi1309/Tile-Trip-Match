@@ -1,0 +1,7 @@
+OVDF v1.1
+LevelData, Assembly-CSharp
+MetaGuid:ac76576c19e9d8b45b3ca2cfa27ba7ff
+
+# layer0
+* [Sirenix.OdinInspector.TableMatrixAttribute]
+	RowHeight = 3
