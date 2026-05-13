@@ -28,42 +28,46 @@ public class TileView : MonoBehaviour
         Refresh();
     }
 
+    public Bounds GetWorldBounds()
+    {
+        return boxCollider.bounds;
+    }
+
     public void Refresh()
     {
         bool exposed = Model.IsExposed;
         darkOverlay.SetActive(!exposed);
-        boxCollider.enabled = exposed;
     }
 
     private void OnMouseDown()
     {
-        if (Model == null || !Model.IsExposed)
+        if (Model == null)
             return;
 
-        // Cast ray and get all colliders at mouse position
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D[] hits = Physics2D.RaycastAll(worldPos, Vector2.zero);
 
         if (hits.Length == 0)
             return;
 
-        // Find the tile with highest layer
-        TileView topTile = null;
+        TileView topExposedTile = null;
         int maxLayer = -1;
 
         foreach (RaycastHit2D hit in hits)
         {
             TileView tileView = hit.collider.GetComponent<TileView>();
-            if (tileView != null && tileView.Model.Layer > maxLayer)
+            if (tileView == null || tileView.Model.IsRemoved || !tileView.Model.IsExposed)
+                continue;
+
+            if (tileView.Model.Layer > maxLayer)
             {
-                topTile = tileView;
+                topExposedTile = tileView;
                 maxLayer = tileView.Model.Layer;
             }
         }
 
-        // Only invoke click if this is the top tile
-        if (topTile == this)
-            OnClicked?.Invoke(this);
+        if (topExposedTile != null)
+            topExposedTile.OnClicked?.Invoke(topExposedTile);
     }
 
     public void SetSortingOrder(int order)

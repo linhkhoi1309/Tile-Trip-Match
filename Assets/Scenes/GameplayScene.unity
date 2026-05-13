@@ -135,26 +135,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &830463251
-RectTransform:
+--- !u!4 &830463251
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830463250}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.51210356, y: 0.51210356, z: 0.51210356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2088621165}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960.499, y: 539.9298}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1045356348
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088621165}
   - component: {fileID: 2088621166}
+  - component: {fileID: 2088621167}
   m_Layer: 5
   m_Name: BoardManager
   m_TagString: Untagged
@@ -558,9 +555,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: ff4227bf55aa3864eb38fb96b6ef3c6f, type: 2}
   tilePrefab: {fileID: 1950211228463376322, guid: 457b213262833b34c823af03354c5d60, type: 3}
+  boardRoot: {fileID: 0}
+  offsetX: 0.25
+  offsetY: 0.25
+  tileGapX: 0.75
+  tileGapY: 0.8
+--- !u!114 &2088621167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088621164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac0566cb46ed1143a7730e3eff5e1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: ff4227bf55aa3864eb38fb96b6ef3c6f, type: 2}
+  tilePrefab: {fileID: 1950211228463376322, guid: 457b213262833b34c823af03354c5d60, type: 3}
   boardRoot: {fileID: 830463251}
-  layerOffset: 0.25
-  tileGap: 0.8
+  offsetX: 0.25
+  offsetY: 0.25
+  tileGapX: 0.75
+  tileGapY: 0.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

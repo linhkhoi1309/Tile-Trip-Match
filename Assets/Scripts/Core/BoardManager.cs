@@ -1,21 +1,21 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
     [Header("Level")]
     [SerializeField] private LevelDataSO levelData;
-
+    
     [Header("Tile")]
     [SerializeField] private TileView tilePrefab;
 
     [SerializeField] private Transform boardRoot;
 
-    [Header("Board Visual")]
-    [SerializeField] private float layerOffset = 0.15f;
-
-    [SerializeField] private float tileGap = 0f;
+    [Header("Board Visual Settings")]
+    [SerializeField] private float offsetX = 0.25f;
+    [SerializeField] private float offsetY = 0.25f;
+    [SerializeField] private float tileGapX = 0.8f;
+    [SerializeField] private float tileGapY = 0.8f;
 
     private readonly List<TileView> allTiles = new();
 
@@ -110,15 +110,11 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 GridToWorldPosition(int x, int y, int layer)
     {
-        float offsetX = layer * layerOffset;
-
-        float offsetY = layer * layerOffset;
-
-        float spacingX = tileSize.x + tileGap;
-
-        float spacingY = tileSize.y + tileGap;
-
-        return new Vector3(x * spacingX + offsetX, -y * spacingY - offsetY, 0f);
+        float layerOffsetX = layer * offsetX;
+        float layerOffsetY = layer * offsetY;
+        float spacingX = tileSize.x + tileGapX;
+        float spacingY = tileSize.y + tileGapY;
+        return new Vector3(x * spacingX + layerOffsetX, -y * spacingY - layerOffsetY, 0f);
     }
 
     private Sprite GetSprite(TileType type)
@@ -134,6 +130,9 @@ public class BoardManager : MonoBehaviour
 
     private void HandleTileClicked(TileView tile)
     {
+        if (!tile.Model.IsExposed)
+            return;
+
         Debug.Log($"Clicked: {tile.Model.Type}");
         RemoveTile(tile);
     }
@@ -160,6 +159,8 @@ public class BoardManager : MonoBehaviour
 
     private bool IsBlocked(TileView tile)
     {
+        Bounds tileBounds = tile.GetWorldBounds();
+
         foreach (TileView other in allTiles)
         {
             if (other == tile)
@@ -168,10 +169,10 @@ public class BoardManager : MonoBehaviour
             if (other.Model.IsRemoved)
                 continue;
 
-            bool higherLayer = other.Model.Layer > tile.Model.Layer;
-            bool samePosition = other.Model.GridPosition == tile.Model.GridPosition;
+            if (other.Model.Layer <= tile.Model.Layer)
+                continue;
 
-            if (higherLayer && samePosition)
+            if (tileBounds.Intersects(other.GetWorldBounds()))
                 return true;
         }
 
