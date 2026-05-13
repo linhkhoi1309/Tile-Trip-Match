@@ -66,8 +66,9 @@ public class TileView : MonoBehaviour
             }
         }
 
-        if (topExposedTile != null)
-            topExposedTile.OnClicked?.Invoke(topExposedTile);
+        if (topExposedTile != null){
+            topExposedTile.OnClicked?.Invoke(this);
+        }
     }
 
     public void SetSortingOrder(int order)

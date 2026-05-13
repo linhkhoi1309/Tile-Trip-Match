@@ -517,7 +517,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088621165}
-  - component: {fileID: 2088621166}
   - component: {fileID: 2088621167}
   m_Layer: 5
   m_Name: BoardManager
@@ -541,25 +540,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 830463251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2088621166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088621164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895373e929b1ec443ba4ecbc6786df23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: ff4227bf55aa3864eb38fb96b6ef3c6f, type: 2}
-  tilePrefab: {fileID: 1950211228463376322, guid: 457b213262833b34c823af03354c5d60, type: 3}
-  boardRoot: {fileID: 0}
-  offsetX: 0.25
-  offsetY: 0.25
-  tileGapX: 0.75
-  tileGapY: 0.8
 --- !u!114 &2088621167
 MonoBehaviour:
   m_ObjectHideFlags: 0

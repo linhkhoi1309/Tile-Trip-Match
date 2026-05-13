@@ -13,31 +13,27 @@ MonoBehaviour:
   m_Name: TileSpriteMapping
   m_EditorClassIdentifier: 
   pairs:
-  - type: 2
+  - type: 3
     sprite: {fileID: -855298285791758126, guid: 5d0ded0e6c9586e4fb1ef838e98d91df, type: 3}
-  - type: 1
+  - type: 2
     sprite: {fileID: 6937817954938267909, guid: 01fc14f788797f84382ffee66637fc3f, type: 3}
   - type: 4
-    sprite: {fileID: -6470460504253458178, guid: b8e4a0a739c0a684fb0c6e7f6c09e1fe, type: 3}
-  - type: 3
     sprite: {fileID: -4178046375966092550, guid: 67ce42d0dd81d424c9ac05a608aed962, type: 3}
-  - type: 10
-    sprite: {fileID: 4130640169021434097, guid: 2c01f2205f31cd349bd8fb4faa37e592, type: 3}
-  - type: 9
-    sprite: {fileID: 3465286685962602723, guid: 810f64f8d912b9641958939ca1d447de, type: 3}
   - type: 5
-    sprite: {fileID: 7028616704906629411, guid: 0a210b76b60b4b5479f38896e94722bc, type: 3}
-  - type: 6
-    sprite: {fileID: 8288426215254106694, guid: acae585a29643c24e9cd94fcafdc4230, type: 3}
+    sprite: {fileID: -6470460504253458178, guid: b8e4a0a739c0a684fb0c6e7f6c09e1fe, type: 3}
   - type: 11
-    sprite: {fileID: 4113829005332862926, guid: df33fa08ab5b538498f0b6de64f3b4ad, type: 3}
-  - type: 13
-    sprite: {fileID: -5099292496197868168, guid: e2755d6254ea8154aaec32e5d17e2723, type: 3}
+    sprite: {fileID: 4130640169021434097, guid: 2c01f2205f31cd349bd8fb4faa37e592, type: 3}
+  - type: 10
+    sprite: {fileID: 3465286685962602723, guid: 810f64f8d912b9641958939ca1d447de, type: 3}
   - type: 12
+    sprite: {fileID: 4113829005332862926, guid: df33fa08ab5b538498f0b6de64f3b4ad, type: 3}
+  - type: 14
+    sprite: {fileID: -5099292496197868168, guid: e2755d6254ea8154aaec32e5d17e2723, type: 3}
+  - type: 13
     sprite: {fileID: -2966200626249415253, guid: b5f79a03b2a858a4bbdca4c6731c5278, type: 3}
-  - type: 0
+  - type: 1
     sprite: {fileID: -1540426309290004842, guid: a3864f2196762e34db49de50ba60e4e5, type: 3}
-  - type: 7
-    sprite: {fileID: 8389134475083476877, guid: 91e0a732aa42a5b4bb5df00cb1f3ea7c, type: 3}
   - type: 8
+    sprite: {fileID: 8389134475083476877, guid: 91e0a732aa42a5b4bb5df00cb1f3ea7c, type: 3}
+  - type: 9
     sprite: {fileID: -6270953770400647376, guid: 42d665a880af25e4e8886c06523ad5ae, type: 3}

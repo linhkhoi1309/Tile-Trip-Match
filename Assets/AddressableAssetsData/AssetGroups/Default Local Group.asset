@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: fc21b055db719cd498a05934f70f5c7a
   m_SerializeEntries:
-  - m_GUID: f62d15abe957f904aaf4c1153a15bf4e
+  - m_GUID: 871a6b9913edb57499d174d4b68abda6
     m_Address: TileSpriteMapping
     m_ReadOnly: 0
     m_SerializedLabels: []
