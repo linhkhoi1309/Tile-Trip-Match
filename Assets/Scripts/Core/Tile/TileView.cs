@@ -7,6 +7,7 @@ public class TileView : MonoBehaviour
     [SerializeField] private SpriteRenderer backgroundSprite;
     [SerializeField] private GameObject darkOverlay;
     private BoxCollider2D boxCollider;
+    private TileAudio tileAudio;
 
     public TileModel Model { get; private set; }
 
@@ -15,6 +16,7 @@ public class TileView : MonoBehaviour
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        tileAudio = GetComponent<TileAudio>();
     }
 
     public void Initialize(TileModel model, Sprite sprite)
@@ -37,6 +39,15 @@ public class TileView : MonoBehaviour
     {
         bool exposed = Model.IsExposed;
         darkOverlay.SetActive(!exposed);
+    }
+
+    public void SetBoardInteractable(bool enabled)
+    {
+        if (boxCollider == null)
+            boxCollider = GetComponent<BoxCollider2D>();
+
+        if (boxCollider != null)
+            boxCollider.enabled = enabled;
     }
 
     private void OnMouseDown()
@@ -66,9 +77,19 @@ public class TileView : MonoBehaviour
             }
         }
 
-        if (topExposedTile != null){
-            topExposedTile.OnClicked?.Invoke(this);
+        if (topExposedTile != null)
+        {
+            topExposedTile.PlayTapSound();
+            topExposedTile.OnClicked?.Invoke(topExposedTile);
         }
+    }
+
+    private void PlayTapSound()
+    {
+        if (tileAudio == null)
+            tileAudio = GetComponent<TileAudio>();
+
+        tileAudio?.PlayTap();
     }
 
     public void SetSortingOrder(int order)

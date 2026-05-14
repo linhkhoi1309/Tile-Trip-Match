@@ -11,6 +11,9 @@ public class BoardManager : MonoBehaviour
 
     [SerializeField] private Transform boardRoot;
 
+    [Header("Rack")]
+    [SerializeField] private TileRack tileRack;
+
     [Header("Board Visual Settings")]
     [SerializeField] private float offsetX = 0.25f;
     [SerializeField] private float offsetY = 0.25f;
@@ -133,14 +136,25 @@ public class BoardManager : MonoBehaviour
         if (!tile.Model.IsExposed)
             return;
 
-        Debug.Log($"Clicked: {tile.Model.Type}");
-        RemoveTile(tile);
-    }
+        if (tileRack == null)
+        {
+            Debug.LogError("TileRack is not assigned on BoardManager.");
+            return;
+        }
 
-    private void RemoveTile(TileView tile)
-    {
+        if (!tileRack.TryAccept(tile))
+        {
+            Debug.Log("Rack is full.");
+            return;
+        }
+
+        tile.OnClicked -= HandleTileClicked;
         tile.Model.IsRemoved = true;
-        tile.gameObject.SetActive(false);
+        tile.Model.IsExposed = true;
+        tile.SetBoardInteractable(false);
+        tile.Refresh();
+
+        Debug.Log($"Moved to rack: {tile.Model.Type}");
         RefreshExposure();
     }
 

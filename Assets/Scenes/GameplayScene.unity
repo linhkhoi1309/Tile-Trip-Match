@@ -288,6 +288,58 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1276357516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276357518}
+  - component: {fileID: 1276357517}
+  m_Layer: 0
+  m_Name: TileRack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1276357517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276357516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4c2e1a9b0d3c5e7f6a8b9c0d1e2f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 7
+  rackRoot: {fileID: 1276357518}
+  firstSlotLocalPosition: {x: 0, y: 0, z: 0}
+  rackLayoutDirection: {x: 1, y: 0, z: 0}
+  rackTileFootprintAlongAxis: 0.8
+  rackGapBetweenTiles: 0
+  moveDuration: 0.2
+  sortingOrderBase: 200
+--- !u!4 &1276357518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276357516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303174768
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +607,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: ff4227bf55aa3864eb38fb96b6ef3c6f, type: 2}
   tilePrefab: {fileID: 1950211228463376322, guid: 457b213262833b34c823af03354c5d60, type: 3}
   boardRoot: {fileID: 830463251}
+  tileRack: {fileID: 1276357517}
   offsetX: 0.25
   offsetY: 0.25
   tileGapX: 0.75
@@ -567,3 +620,4 @@ SceneRoots:
   - {fileID: 1396593070}
   - {fileID: 1303174771}
   - {fileID: 830463251}
+  - {fileID: 1276357518}
