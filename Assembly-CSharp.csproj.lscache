@@ -50,23 +50,24 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 /warnaserror+:NU1605
 
 [sourceFiles]
+Assets/Scripts/Audio/
+ AudioMappingSO.cs
+ BackgroundMusicPlayer.cs
+ TileAudio.cs
+ UIAudio.cs
 Assets/Scripts/
  Configs/SceneNames.cs
  Core/
-  AssetLoader.cs
-  AudioMappingSO.cs
-  BackgroundMusicPlayer.cs
-  BoardManager.cs
-  GameContext.cs
-  GameManager.cs
+  Board/BoardManager.cs
+  Game/
+   GameContext.cs
+   GameManager.cs
   Level/
    LevelDataSO.cs
    LevelLayerData.cs
    LevelManager.cs
    LevelSession.cs
-  LoadingController.cs
   Tile/
-   TileAudio.cs
    TileModel.cs
    TileRack.cs
    TileRackAudio.cs
@@ -74,12 +75,15 @@ Assets/Scripts/
    TileType.cs
    TileView.cs
  UI/
-  CustomCursorManager.cs
-  LevelButton.cs
-  LevelPlayButton.cs
-  LevelSelectorUI.cs
-  LoadingUI.cs
-  UIAudio.cs
+  Global/CustomCursorManager.cs
+  Home/
+   LevelButton.cs
+   LevelPlayButton.cs
+   LevelSelectorUI.cs
+  Loading/LoadingUI.cs
+ Utilities/
+  AssetLoader.cs
+  LoadingController.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
