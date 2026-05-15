@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -37,7 +38,22 @@ public class TileRack : MonoBehaviour
     [SerializeField]
     private int sortingOrderBase = 200;
 
+    [Header("Match-3 removal")]
+    [SerializeField]
+    [Min(0.01f)]
+    private float matchRemoveDuration = 0.25f;
+
+    [SerializeField]
+    private Ease matchRemoveEase = Ease.InBack;
+
+    private TileRackAudio rackAudio;
+
+    /// <summary>Fired after a triple is matched, before tiles are destroyed. Lets board drop references.</summary>
+    public event Action<IReadOnlyList<TileView>> OnMatchRemovedFromRack;
+
     private readonly List<TileView> placedTiles = new();
+
+    private bool isResolvingMatches;
 
     public int Capacity => capacity;
 
@@ -47,9 +63,19 @@ public class TileRack : MonoBehaviour
 
     private Transform RackParent => rackRoot != null ? rackRoot : transform;
 
+    private void Awake()
+    {
+        rackAudio = GetComponent<TileRackAudio>();
+        if (rackAudio == null)
+            rackAudio = gameObject.AddComponent<TileRackAudio>();
+    }
+
     public bool TryAccept(TileView tile)
     {
         if (tile == null)
+            return false;
+
+        if (isResolvingMatches)
             return false;
 
         if (placedTiles.Count >= capacity)
@@ -98,5 +124,123 @@ public class TileRack : MonoBehaviour
         t.localRotation = Quaternion.identity;
         tile.SetSortingOrder(sortingOrderBase + slotIndex);
         tile.SetBoardInteractable(false);
+
+        TryResolveMatchesChain();
+    }
+
+    private void TryResolveMatchesChain()
+    {
+        List<TileView> triple = FindFirstTriple(placedTiles);
+        if (triple == null)
+        {
+            isResolvingMatches = false;
+            return;
+        }
+
+        isResolvingMatches = true;
+        rackAudio?.PlayMatchSound();
+
+        float duration = Mathf.Max(0.01f, matchRemoveDuration);
+        Sequence removeSeq = DOTween.Sequence();
+        foreach (TileView matched in triple)
+        {
+            if (matched == null)
+                continue;
+
+            Transform mt = matched.transform;
+            mt.DOKill(false);
+            removeSeq.Join(mt.DOScale(Vector3.zero, duration).SetEase(matchRemoveEase).SetTarget(matched.gameObject));
+        }
+
+        removeSeq.OnComplete(() =>
+        {
+            OnMatchRemovedFromRack?.Invoke(triple);
+
+            foreach (TileView matched in triple)
+            {
+                if (matched == null)
+                    continue;
+
+                matched.transform.DOKill(false);
+                placedTiles.Remove(matched);
+                Destroy(matched.gameObject);
+            }
+
+            RecompactRackThenResolveFurther();
+        });
+    }
+
+    private void RecompactRackThenResolveFurther()
+    {
+        if (placedTiles.Count == 0)
+        {
+            TryResolveMatchesChain();
+            return;
+        }
+
+        Transform parent = RackParent;
+        float duration = Mathf.Max(0.0001f, moveDuration);
+        Sequence moveSeq = DOTween.Sequence();
+
+        for (int i = 0; i < placedTiles.Count; i++)
+        {
+            TileView tile = placedTiles[i];
+            if (tile == null)
+                continue;
+
+            Vector3 worldEnd = parent.TransformPoint(GetSlotLocalPosition(i));
+            Transform tr = tile.transform;
+            tr.DOKill(false);
+            moveSeq.Join(tr.DOMove(worldEnd, duration).SetEase(moveEase).SetTarget(tile.gameObject));
+        }
+
+        moveSeq.OnComplete(() =>
+        {
+            SnapAllTilesToSlots();
+            TryResolveMatchesChain();
+        });
+    }
+
+    private void SnapAllTilesToSlots()
+    {
+        Transform parent = RackParent;
+        for (int i = 0; i < placedTiles.Count; i++)
+        {
+            TileView tile = placedTiles[i];
+            if (tile == null)
+                continue;
+
+            tile.transform.SetParent(parent, false);
+            tile.transform.localPosition = GetSlotLocalPosition(i);
+            tile.transform.localRotation = Quaternion.identity;
+            tile.SetSortingOrder(sortingOrderBase + i);
+        }
+    }
+
+    /// <summary>Three tiles of the same type anywhere in the rack (list order does not matter).</summary>
+    private static List<TileView> FindFirstTriple(List<TileView> rack)
+    {
+        var byType = new Dictionary<TileType, List<TileView>>();
+        foreach (TileView tile in rack)
+        {
+            if (tile == null || tile.Model == null || tile.Model.Type == TileType.None)
+                continue;
+
+            if (!byType.TryGetValue(tile.Model.Type, out List<TileView> list))
+            {
+                list = new List<TileView>();
+                byType[tile.Model.Type] = list;
+            }
+
+            list.Add(tile);
+        }
+
+        foreach (KeyValuePair<TileType, List<TileView>> kv in byType)
+        {
+            if (kv.Value.Count >= 3)
+                return kv.Value.GetRange(0, 3);
+        }
+
+        return null;
     }
 }

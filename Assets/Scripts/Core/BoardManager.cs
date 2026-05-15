@@ -26,6 +26,9 @@ public class BoardManager : MonoBehaviour
 
     private async void Start()
     {
+        if (tileRack != null)
+            tileRack.OnMatchRemovedFromRack += HandleMatchRemovedFromRack;
+
         Initialize();
         await AssetsLoader.LoadAsync();
         GenerateBoard();
@@ -33,7 +36,20 @@ public class BoardManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (tileRack != null)
+            tileRack.OnMatchRemovedFromRack -= HandleMatchRemovedFromRack;
+
         AssetsLoader.Release();
+    }
+
+    private void HandleMatchRemovedFromRack(IReadOnlyList<TileView> tiles)
+    {
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            TileView t = tiles[i];
+            if (t != null)
+                allTiles.Remove(t);
+        }
     }
 
     private void Initialize()
