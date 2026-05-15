@@ -3,41 +3,58 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    private enum EndState
+    {
+        None,
+        Win,
+        Lose
+    }
+
     [Header("Level")]
     [SerializeField] private LevelDataSO levelData;
-    
+
     [Header("Tile")]
     [SerializeField] private TileView tilePrefab;
-
     [SerializeField] private Transform boardRoot;
 
     [Header("Rack")]
     [SerializeField] private TileRack tileRack;
+
+    [Header("Result UI")]
+    [SerializeField] private GameResultOverlay resultOverlay;
 
     [Header("Board Visual Settings")]
     [SerializeField] private float offsetX = 0.25f;
     [SerializeField] private float offsetY = 0.25f;
     [SerializeField] private float tileGapX = 0.8f;
     [SerializeField] private float tileGapY = 0.8f;
-    [SerializeField]
-    private Vector3 boardOrigin = Vector3.zero;
+    [SerializeField] private Vector3 boardOrigin = Vector3.zero;
 
     private readonly List<TileView> allTiles = new();
-
     private Vector2 tileSize;
+    private EndState endState = EndState.None;
 
     private async void Start()
     {
         if (tileRack != null)
+        {
             tileRack.OnMatchRemovedFromRack += HandleMatchRemovedFromRack;
+            tileRack.OnRackOverflow += HandleRackOverflow;
+        }
 
         Initialize();
         await AssetsLoader.LoadAsync();
+
         if (GameManager.Instance != null && GameManager.Instance.Context != null && GameManager.Instance.Context.CurrentLevelData != null)
             levelData = GameManager.Instance.Context.CurrentLevelData;
 
         if (tileRack != null && levelData != null)
             tileRack.SetCapacity(levelData.RackSize);
+
+        endState = EndState.None;
+
+        if (resultOverlay != null)
+            resultOverlay.Hide();
 
         GenerateBoard();
     }
@@ -45,7 +62,10 @@ public class BoardManager : MonoBehaviour
     private void OnDestroy()
     {
         if (tileRack != null)
+        {
             tileRack.OnMatchRemovedFromRack -= HandleMatchRemovedFromRack;
+            tileRack.OnRackOverflow -= HandleRackOverflow;
+        }
 
         AssetsLoader.Release();
     }
@@ -54,10 +74,18 @@ public class BoardManager : MonoBehaviour
     {
         for (int i = 0; i < tiles.Count; i++)
         {
-            TileView t = tiles[i];
-            if (t != null)
-                allTiles.Remove(t);
+            TileView tile = tiles[i];
+
+            if (tile != null)
+                allTiles.Remove(tile);
         }
+
+        EvaluateWinState();
+    }
+
+    private void HandleRackOverflow()
+    {
+        ShowLose();
     }
 
     private void Initialize()
@@ -82,9 +110,7 @@ public class BoardManager : MonoBehaviour
 
             if (grid == null)
             {
-                Debug.LogError(
-                    $"Layer {layer} grid is NULL");
-
+                Debug.LogError($"Layer {layer} grid is NULL");
                 continue;
             }
 
@@ -97,15 +123,16 @@ public class BoardManager : MonoBehaviour
                 {
                     int value = grid[x, y];
 
-                    // 0 = Empty
-                    if (value == 0) continue;
+                    if (value == 0)
+                        continue;
 
-                    TileType type = (TileType)value;
-                    CreateTile(x, y, layer, type);
+                    CreateTile(x, y, layer, (TileType)value);
                 }
             }
         }
+
         RefreshExposure();
+        EvaluateWinState();
     }
 
     private void CreateTile(int x, int y, int layer, TileType type)
@@ -120,16 +147,11 @@ public class BoardManager : MonoBehaviour
         };
 
         Vector3 worldPosition = GridToWorldPosition(x, y, layer);
-
         TileView tile = Instantiate(tilePrefab, worldPosition, Quaternion.identity, boardRoot);
-
         Sprite sprite = GetSprite(type);
 
         tile.Initialize(model, sprite);
-
-        // Higher layer renders above lower layer
         tile.SetSortingOrder(layer * 10);
-
         tile.OnClicked += HandleTileClicked;
 
         allTiles.Add(tile);
@@ -141,6 +163,7 @@ public class BoardManager : MonoBehaviour
         float layerOffsetY = layer * offsetY;
         float spacingX = tileSize.x + tileGapX;
         float spacingY = tileSize.y + tileGapY;
+
         return new Vector3(x * spacingX + layerOffsetX, -y * spacingY - layerOffsetY, 0f) + boardOrigin;
     }
 
@@ -157,6 +180,9 @@ public class BoardManager : MonoBehaviour
 
     private void HandleTileClicked(TileView tile)
     {
+        if (endState != EndState.None)
+            return;
+
         if (!tile.Model.IsExposed)
             return;
 
@@ -180,10 +206,14 @@ public class BoardManager : MonoBehaviour
 
         Debug.Log($"Moved to rack: {tile.Model.Type}");
         RefreshExposure();
+        EvaluateWinState();
     }
 
     private void RefreshExposure()
     {
+        if (endState != EndState.None)
+            return;
+
         foreach (TileView tile in allTiles)
         {
             if (tile.Model.IsRemoved)
@@ -222,11 +252,60 @@ public class BoardManager : MonoBehaviour
         foreach (TileView tile in allTiles)
         {
             if (tile != null)
-            {
                 Destroy(tile.gameObject);
-            }
         }
 
         allTiles.Clear();
+    }
+
+    private void EvaluateWinState()
+    {
+        if (endState != EndState.None)
+            return;
+
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            TileView tile = allTiles[i];
+
+            if (tile != null && !tile.Model.IsRemoved)
+                return;
+        }
+
+        ShowWin();
+    }
+
+    private void ShowWin()
+    {
+        if (endState != EndState.None)
+            return;
+
+        endState = EndState.Win;
+        DisableBoardInteraction();
+
+        if (resultOverlay != null)
+            resultOverlay.ShowWin();
+    }
+
+    private void ShowLose()
+    {
+        if (endState != EndState.None)
+            return;
+
+        endState = EndState.Lose;
+        DisableBoardInteraction();
+
+        if (resultOverlay != null)
+            resultOverlay.ShowLose();
+    }
+
+    private void DisableBoardInteraction()
+    {
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            TileView tile = allTiles[i];
+
+            if (tile != null)
+                tile.SetBoardInteractable(false);
+        }
     }
 }

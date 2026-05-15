@@ -51,6 +51,9 @@ public class TileRack : MonoBehaviour
     /// <summary>Fired after a triple is matched, before tiles are destroyed. Lets board drop references.</summary>
     public event Action<IReadOnlyList<TileView>> OnMatchRemovedFromRack;
 
+    /// <summary>Fired when the rack becomes full before a triple can be resolved.</summary>
+    public event Action OnRackOverflow;
+
     private readonly List<TileView> placedTiles = new();
 
     private bool isResolvingMatches;
@@ -84,7 +87,10 @@ public class TileRack : MonoBehaviour
             return false;
 
         if (placedTiles.Count >= capacity)
+        {
+            OnRackOverflow?.Invoke();
             return false;
+        }
 
         int slotIndex = placedTiles.Count;
         placedTiles.Add(tile);

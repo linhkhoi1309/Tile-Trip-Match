@@ -74,6 +74,11 @@ Assets/Scripts/
    TileSpriteMappingSO.cs
    TileType.cs
    TileView.cs
+ UI/Gameplay/
+  GameResultOverlay.cs
+  NextLevelButton.cs
+  PlayAgainButton.cs
+  ReturnButton.cs
  UI/
   Global/CustomCursorManager.cs
   Home/

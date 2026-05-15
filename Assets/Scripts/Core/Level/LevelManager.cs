@@ -4,6 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     [SerializeField] private List<LevelDataSO> levels = new();
 
     public void StartLevel(int level)
@@ -17,6 +31,28 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.Context.CurrentLevelData = levelData;
         SceneManager.LoadScene(SceneNames.Gameplay);
     }
+
+    public void RestartCurrentLevel()
+    {
+        StartLevel(CurrentLevel);
+    }
+
+    public void StartNextLevel()
+    {
+        StartLevel(CurrentLevel + 1);
+    }
+
+    public bool HasNextLevel()
+    {
+        return GetLevelData(CurrentLevel + 1) != null;
+    }
+
+    public int CurrentLevel =>
+        GameManager.Instance != null &&
+        GameManager.Instance.Context != null &&
+        GameManager.Instance.Context.LevelSession != null
+            ? GameManager.Instance.Context.LevelSession.SelectedLevel
+            : 1;
 
     private LevelDataSO GetLevelData(int level)
     {
