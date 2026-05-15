@@ -284,3 +284,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 3041742113544191326}
+  normalSprite: {fileID: 1178712953220140785, guid: dfca7adfdc03efc49a3fee1b6ef3d2d3, type: 3}
+  selectedSprite: {fileID: -3216277658935809147, guid: fd566d69609d90b4fae4abb84674bd0a, type: 3}
