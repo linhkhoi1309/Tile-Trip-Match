@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac76576c19e9d8b45b3ca2cfa27ba7ff, type: 3}
-  m_Name: Level1Data
+  m_Name: Level2Data
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -36,10 +36,70 @@ MonoBehaviour:
       Data: 2|System.Int32[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 16
+      Data: 25
     - Name: ranks
       Entry: 1
-      Data: 4|4
+      Data: 5|5
+    - Name: 
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 8
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 8
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 7
+    - Name: 
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 3
       Data: 2
@@ -54,40 +114,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 3
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
+      Data: 7
     - Name: 
       Entry: 13
       Data: 
@@ -105,16 +132,49 @@ MonoBehaviour:
       Data: 4|System.Int32[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 16
+      Data: 25
     - Name: ranks
       Entry: 1
-      Data: 4|4
-    - Name: 
-      Entry: 3
-      Data: 3
+      Data: 5|5
     - Name: 
       Entry: 3
       Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 8
+    - Name: 
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 3
       Data: 1
@@ -123,7 +183,13 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 5
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 7
     - Name: 
       Entry: 3
       Data: 3
@@ -135,25 +201,13 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 3
       Data: 0
     - Name: 
       Entry: 3
       Data: 0
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
       Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 0
@@ -172,8 +226,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Width: 4
-  Height: 4
+  Width: 5
+  Height: 5
   RackSize: 7
   TimeLimitSeconds: 300
   Layers: []
