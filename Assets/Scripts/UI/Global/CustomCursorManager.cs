@@ -17,6 +17,8 @@ public class CustomCursorManager : MonoBehaviour
             return;
         }
 
+        
+
         instance = this;
         DontDestroyOnLoad(gameObject);
         ApplyCursor();

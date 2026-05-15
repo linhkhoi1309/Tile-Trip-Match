@@ -104,7 +104,7 @@ public class BoardManager : MonoBehaviour
 
         ClearBoard();
 
-        for (int layer = 0; layer < levelData.Layers.Count; layer++)
+        for (int layer = levelData.Layers.Count - 1; layer >= 0; layer--)
         {
             int[,] grid = levelData.Layers[layer].Tiles;
 
