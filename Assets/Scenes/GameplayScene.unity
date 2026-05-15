@@ -323,14 +323,13 @@ MonoBehaviour:
   rackRoot: {fileID: 1276357518}
   firstSlotLocalPosition: {x: 0, y: 0, z: 0}
   rackLayoutDirection: {x: 1, y: 0, z: 0}
-  rackTileFootprintAlongAxis: 0.8
+  rackTileFootprintAlongAxis: 0.6
   rackGapBetweenTiles: 0
   moveDuration: 0.2
   moveEase: 10
   sortingOrderBase: 200
   matchRemoveDuration: 0.25
   matchRemoveEase: 26
-  rackAudio: {fileID: 0}
 --- !u!4 &1276357518
 Transform:
   m_ObjectHideFlags: 0
@@ -340,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 1276357516}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -1.5, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -358,7 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a91e4b2d8f4039a1e6c5b0f3d2a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchClip: {fileID: 8300000, guid: e81605ae9ebd6124aa9078ead7b78e46, type: 3}
   matchClipVolume: 1
 --- !u!82 &1276357520
 AudioSource:
@@ -727,8 +725,9 @@ MonoBehaviour:
   tileRack: {fileID: 1276357517}
   offsetX: 0.25
   offsetY: 0.25
-  tileGapX: 0.75
-  tileGapY: 0.8
+  tileGapX: 0.6
+  tileGapY: 0.65
+  boardOrigin: {x: -1.5, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

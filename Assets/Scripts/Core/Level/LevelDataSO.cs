@@ -12,6 +12,10 @@ public class LevelDataSO : SerializedScriptableObject
 
     public int Height = 4;
 
+    public int RackSize = 7;
+
+    public float TimeLimitSeconds = 300f;
+
     [OdinSerialize]
     [ListDrawerSettings(Expanded = true)]
     public List<LevelLayerData> Layers =

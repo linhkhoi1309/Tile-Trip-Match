@@ -19,6 +19,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private float offsetY = 0.25f;
     [SerializeField] private float tileGapX = 0.8f;
     [SerializeField] private float tileGapY = 0.8f;
+    [SerializeField]
+    private Vector3 boardOrigin = Vector3.zero;
 
     private readonly List<TileView> allTiles = new();
 
@@ -31,6 +33,12 @@ public class BoardManager : MonoBehaviour
 
         Initialize();
         await AssetsLoader.LoadAsync();
+        if (GameManager.Instance != null && GameManager.Instance.Context != null && GameManager.Instance.Context.CurrentLevelData != null)
+            levelData = GameManager.Instance.Context.CurrentLevelData;
+
+        if (tileRack != null && levelData != null)
+            tileRack.SetCapacity(levelData.RackSize);
+
         GenerateBoard();
     }
 
@@ -133,7 +141,7 @@ public class BoardManager : MonoBehaviour
         float layerOffsetY = layer * offsetY;
         float spacingX = tileSize.x + tileGapX;
         float spacingY = tileSize.y + tileGapY;
-        return new Vector3(x * spacingX + layerOffsetX, -y * spacingY - layerOffsetY, 0f);
+        return new Vector3(x * spacingX + layerOffsetX, -y * spacingY - layerOffsetY, 0f) + boardOrigin;
     }
 
     private Sprite GetSprite(TileType type)

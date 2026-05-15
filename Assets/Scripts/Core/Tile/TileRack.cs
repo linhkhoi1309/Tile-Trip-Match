@@ -70,6 +70,11 @@ public class TileRack : MonoBehaviour
             rackAudio = gameObject.AddComponent<TileRackAudio>();
     }
 
+    public void SetCapacity(int newCapacity)
+    {
+        capacity = Mathf.Max(1, newCapacity);
+    }
+
     public bool TryAccept(TileView tile)
     {
         if (tile == null)
