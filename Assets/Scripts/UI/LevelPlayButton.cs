@@ -6,6 +6,8 @@ public class LevelPlayButton : MonoBehaviour
 
     public void OnClick()
     {
+        UIAudio.PlayTap();
+
         if (levelSelectorUI != null)
             levelSelectorUI.OnPlayButton();
     }

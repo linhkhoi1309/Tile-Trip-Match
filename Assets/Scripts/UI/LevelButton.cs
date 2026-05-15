@@ -28,6 +28,7 @@ public class LevelButton : MonoBehaviour
 
     public void OnClick()
     {
+        UIAudio.PlayTap();
         onSelected?.Invoke(this, level);
     }
 

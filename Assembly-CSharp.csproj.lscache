@@ -78,6 +78,7 @@ Assets/Scripts/
   LevelPlayButton.cs
   LevelSelectorUI.cs
   LoadingUI.cs
+  UIAudio.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
