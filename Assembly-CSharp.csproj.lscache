@@ -74,6 +74,7 @@ Assets/Scripts/
    TileType.cs
    TileView.cs
  UI/
+  CustomCursorManager.cs
   LevelButton.cs
   LevelPlayButton.cs
   LevelSelectorUI.cs
