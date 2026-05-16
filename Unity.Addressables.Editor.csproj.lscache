@@ -528,6 +528,7 @@ Library/PackageCache/
  com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
 Temp/bin/Debug/
  Unity.Addressables.dll
+ Unity.Profiling.Core.dll
  Unity.ResourceManager.dll
  Unity.ScriptableBuildPipeline.dll
  Unity.ScriptableBuildPipeline.Editor.dll

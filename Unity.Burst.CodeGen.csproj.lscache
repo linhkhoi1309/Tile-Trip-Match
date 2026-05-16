@@ -334,7 +334,12 @@ Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/
  Unity.Burst.Cecil.Pdb.dll
  Unity.Burst.Cecil.Rocks.dll
 Library/PackageCache/com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
-Temp/bin/Debug/Unity.Burst.dll
+Temp/bin/Debug/
+ Unity.Burst.dll
+ UnityEditor.TestRunner.dll
+ UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
+ UnityEngine.UI.dll
 
 [analyzerReferences]
 ../../../../../Program Files/Unity/Hub/Editor/6000.0.74f1/Editor/Data/Tools/Unity.SourceGenerators/

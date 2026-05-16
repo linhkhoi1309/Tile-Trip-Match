@@ -74,12 +74,13 @@ Assets/Scripts/
    TileSpriteMappingSO.cs
    TileType.cs
    TileView.cs
- UI/Gameplay/
-  GameResultOverlay.cs
-  NextLevelButton.cs
-  PlayAgainButton.cs
-  ReturnButton.cs
  UI/
+  Common/HoverTween.cs
+  Gameplay/
+   GameResultOverlay.cs
+   NextLevelButton.cs
+   PlayAgainButton.cs
+   ReturnButton.cs
   Global/CustomCursorManager.cs
   Home/
    LevelButton.cs
@@ -422,13 +423,16 @@ Temp/bin/Debug/
  Unity.ScriptableBuildPipeline.Editor.dll
  Unity.Searcher.Editor.dll
  Unity.ShaderGraph.Editor.dll
+ Unity.ShaderGraph.Utilities.dll
  Unity.TextMeshPro.dll
  Unity.TextMeshPro.Editor.dll
  Unity.Timeline.dll
  Unity.Timeline.Editor.dll
  Unity.VisualStudio.Editor.dll
+ UnityEditor.TestRunner.dll
  UnityEditor.UI.Analytics.dll
  UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]

@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 465618698}
   - component: {fileID: 465618697}
   - component: {fileID: 465618700}
+  - component: {fileID: 465618701}
   m_Layer: 5
   m_Name: PlayAgainButton
   m_TagString: Untagged
@@ -386,6 +387,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff71b33b6fb40e5449bef205125a786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &465618701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465618695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c41f83dc5a42248bb8c8a21d0bff99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.08
+  hoverDuration: 0.12
+  hoverEase: 27
 --- !u!1 &715055159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1579,7 @@ GameObject:
   - component: {fileID: 1870966493}
   - component: {fileID: 1870966492}
   - component: {fileID: 1870966495}
+  - component: {fileID: 1870966496}
   m_Layer: 5
   m_Name: NextLevelButton
   m_TagString: Untagged
@@ -1684,6 +1701,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49c2d49b4a0aca4d8947af6eddbd713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1870966496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870966490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c41f83dc5a42248bb8c8a21d0bff99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.08
+  hoverDuration: 0.12
+  hoverEase: 27
 --- !u!1 &2088621164
 GameObject:
   m_ObjectHideFlags: 0

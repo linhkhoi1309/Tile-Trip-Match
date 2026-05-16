@@ -393,13 +393,16 @@ Temp/bin/Debug/
  Unity.ScriptableBuildPipeline.Editor.dll
  Unity.Searcher.Editor.dll
  Unity.ShaderGraph.Editor.dll
+ Unity.ShaderGraph.Utilities.dll
  Unity.TextMeshPro.dll
  Unity.TextMeshPro.Editor.dll
  Unity.Timeline.dll
  Unity.Timeline.Editor.dll
  Unity.VisualStudio.Editor.dll
+ UnityEditor.TestRunner.dll
  UnityEditor.UI.Analytics.dll
  UnityEditor.UI.dll
+ UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 
 [analyzerReferences]
